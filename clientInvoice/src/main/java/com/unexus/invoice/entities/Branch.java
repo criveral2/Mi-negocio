@@ -12,7 +12,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.validation.constraints.Pattern;
 import lombok.Data;
 
 /**
@@ -25,7 +24,6 @@ public class Branch {
     @Id()
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    @Pattern(regexp = "[MATRIZ}",message = "El campo acepta solo el tipo de sucursal: MATRIZ o SUCURSAL")
     private String branchType;
     private String province;
     private String city;

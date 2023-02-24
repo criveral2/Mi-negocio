@@ -18,6 +18,7 @@ import javax.validation.constraints.Email;
 import lombok.Data;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 /**
  *
@@ -29,9 +30,11 @@ public class Customer {
     @Id()
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+    
+    @Pattern(message = "El campo acepta solo el tipo de identificacion: RUC o CEDULA",
+             regexp = "(?i)(\\W|^)(RUC|CEDULA)(\\W|$)")
     private String identificationType;
     
-    @NotNull(message = "La identificacion no puede ser nula")
     @NotBlank(message = "La identificacion no puede estar vacia")
     @Column(unique = true)
     private String identificationNumber;
@@ -44,7 +47,8 @@ public class Customer {
     private String email;
     private String phone;
     
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "customer", 
+               cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Branch> branches;
 
     
